@@ -1,27 +1,21 @@
 package org.zerock.blog.springbootdeveloper.dto;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.zerock.blog.springbootdeveloper.domain.Article;
+import org.zerock.blog.springbootdeveloper.domain.Comment;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class AddArticleRequest {
-
-    @NotNull
-    @Size(min = 1, max = 10)
-    private String title;
-
-    @NotNull
+public class AddCommentRequest {
+    private Long articleId;
     private String content;
 
-    public Article toEntity(String author){
-        return Article.builder()
-                .title(title)
+    public Comment toEntity(String author, Article article) {
+        return Comment.builder()
+                .article(article)
                 .content(content)
                 .author(author)
                 .build();
